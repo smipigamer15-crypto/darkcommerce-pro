@@ -229,4 +229,7 @@ return [
 'you_receive_updates' => 'Otrzymujesz nasze aktualizacje',
 'get_notified_offers' => 'Otrzymuj powiadomienia o ofertach',
 'points_info' => '100 punktów = $1',
+'moved_to_cart' => 'Produkt przeniesiony do koszyka!',
+'removed_from_wishlist' => 'Usunięto z listy życzeń',
+'added_to_wishlist' => 'Dodano do listy życzeń',
 ];

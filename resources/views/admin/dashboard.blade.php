@@ -11,12 +11,6 @@
                 <p class="text-zinc-400 mt-1">Welcome back, {{ auth()->user()->name }}</p>
             </div>
             <div class="flex items-center gap-3">
-                <form action="{{ route('push.test') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="px-4 py-2.5 bg-indigo-500 hover:bg-indigo-400 text-white rounded-xl text-sm font-medium transition-all hover:scale-105 flex items-center gap-2">
-                        <i class="fa-solid fa-bell"></i> Send Test Push
-                    </button>
-                </form>
                 <a href="{{ route('admin.products.create') }}" class="px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-xl transition-all hover:scale-105">
                     + Add Product
                 </a>

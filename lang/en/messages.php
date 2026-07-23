@@ -229,4 +229,10 @@ return [
 'you_receive_updates' => 'You receive our updates',
 'get_notified_offers' => 'Get notified about offers',
 'points_info' => '100 points = $1',
+'moved_to_cart' => 'Product moved to cart!',
+'removed_from_wishlist' => 'Removed from wishlist',
+'added_to_wishlist' => 'Added to wishlist',
+'points_not_enough' => 'You have :points points (worth $:discount). Remaining to pay: $:remaining',
+'points_not_enough' => 'У вас :points балів (знижка $:discount). Залишилось до сплати: $:remaining',
+'points_not_enough' => 'Masz :points punktów (zniżka $:discount). Pozostało do zapłaty: $:remaining',
 ];

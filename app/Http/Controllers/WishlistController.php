@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -29,10 +30,10 @@ class WishlistController extends Controller
         
         if ($user->wishlist()->where('product_id', $product->id)->exists()) {
             $user->wishlist()->detach($product->id);
-            $message = 'Removed from wishlist';
+            $message = __('messages.removed_from_wishlist');
         } else {
             $user->wishlist()->attach($product->id);
-            $message = 'Added to wishlist';
+            $message = __('messages.added_to_wishlist');
         }
 
         return back()->with('success', $message);
@@ -40,21 +41,30 @@ class WishlistController extends Controller
 
     public function addToCart(Product $product)
     {
-        $cart = session()->get('cart', []);
+        if (!auth()->check()) {
+            return redirect()->route('login');
+        }
 
-        if (isset($cart[$product->id])) {
-            $cart[$product->id]['quantity']++;
+        // Додаємо в кошик (БД)
+        $existing = Cart::where('user_id', auth()->id())
+            ->where('product_id', $product->id)
+            ->first();
+
+        if ($existing) {
+            $existing->increment('quantity');
+            $existing->update(['expires_at' => now()->addHour()]);
         } else {
-            $cart[$product->id] = ['quantity' => 1];
+            Cart::create([
+                'user_id' => auth()->id(),
+                'product_id' => $product->id,
+                'quantity' => 1,
+                'expires_at' => now()->addHour(),
+            ]);
         }
 
-        session()->put('cart', $cart);
+        // Видаляємо з wishlist
+        auth()->user()->wishlist()->detach($product->id);
 
-        // Видаляємо з wishlist після додавання в кошик
-        if (auth()->check()) {
-            auth()->user()->wishlist()->detach($product->id);
-        }
-
-        return redirect()->route('cart.index')->with('success', 'Product moved to cart!');
+        return redirect()->route('cart.index')->with('success', __('messages.moved_to_cart'));
     }
 }

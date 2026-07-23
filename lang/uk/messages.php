@@ -229,4 +229,7 @@ return [
 'you_receive_updates' => 'Ви отримуєте наші оновлення',
 'get_notified_offers' => 'Отримуйте сповіщення про пропозиції',
 'points_info' => '100 балів = $1',
+'moved_to_cart' => 'Товар переміщено в кошик!',
+'removed_from_wishlist' => 'Видалено зі списку бажань',
+'added_to_wishlist' => 'Додано до списку бажань',
 ];

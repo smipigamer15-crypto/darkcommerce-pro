@@ -160,29 +160,22 @@
                             @endif
                         </div>
 
-                        <!-- Use Points Toggle -->
+                                              <!-- Use Points Checkbox -->
                         @auth
                             @if(auth()->user()->points > 0)
                                 <div class="mb-4 p-4 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 border border-indigo-500/10 rounded-xl">
-                                    <form action="{{ route('checkout.togglePoints') }}" method="POST">
-                                        @csrf
-                                        <div class="flex items-center justify-between">
-                                            <div class="flex items-center gap-3">
-                                                <div class="w-9 h-9 bg-indigo-500/10 rounded-lg flex items-center justify-center">
-                                                    <i class="fa-solid fa-coins text-indigo-400 text-sm"></i>
-                                                </div>
-                                                <div>
-                                                    <p class="text-white text-sm font-medium">{{ __('messages.use_points') }}</p>
-                                                    <p class="text-zinc-500 text-xs">{{ auth()->user()->points }} {{ __('messages.points') }} = <span class="text-indigo-400">${{ number_format(auth()->user()->points_value, 2) }}</span></p>
-                                                </div>
+                                    <label class="flex items-center justify-between cursor-pointer">
+                                        <div class="flex items-center gap-3">
+                                            <div class="w-9 h-9 bg-indigo-500/10 rounded-lg flex items-center justify-center">
+                                                <i class="fa-solid fa-coins text-indigo-400 text-sm"></i>
                                             </div>
-                                            <button type="submit" class="relative w-12 h-7 rounded-full transition-all {{ session('use_points') ? 'bg-indigo-500' : 'bg-white/10' }}">
-                                                <span class="absolute top-0.5 {{ session('use_points') ? 'left-[26px]' : 'left-0.5' }} w-6 h-6 rounded-full bg-white shadow-md transition-all flex items-center justify-center">
-                                                    @if(session('use_points'))<i class="fa-solid fa-check text-indigo-500 text-[10px]"></i>@endif
-                                                </span>
-                                            </button>
+                                            <div>
+                                                <p class="text-white text-sm font-medium">{{ __('messages.use_points') }}</p>
+                                                <p class="text-zinc-500 text-xs">{{ auth()->user()->points }} {{ __('messages.points') }} = <span class="text-indigo-400">${{ number_format(auth()->user()->points_value, 2) }}</span></p>
+                                            </div>
                                         </div>
-                                    </form>
+                                        <input type="checkbox" name="use_points" value="1" class="w-5 h-5 rounded bg-white/5 border-white/10 text-indigo-500 focus:ring-indigo-500/20">
+                                    </label>
                                 </div>
                             @endif
                         @endauth
