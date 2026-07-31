@@ -39,9 +39,8 @@ class ChatSupport extends Component
         ];
         Cache::put('chat_messages', $messages, now()->addDay());
 
-        // Автовідповідь
         $responses = [
-            "👋 Hi! Thanks for your message. Our team will reply within 2 hours.",
+            "Hi! Thanks for your message. Our team will reply within 2 hours.",
             "Thanks for reaching out! How can we help you today?",
             "We've received your message. We'll get back to you soon!",
         ];

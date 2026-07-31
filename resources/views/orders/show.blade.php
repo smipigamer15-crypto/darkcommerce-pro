@@ -35,7 +35,6 @@
             </div>
         @endif
 
-        <!-- Progress Bar -->
         <div class="bg-[#111111] border border-white/5 rounded-2xl p-8 mb-6">
             <h2 class="text-lg font-semibold text-white mb-8">{{ __('messages.order_status') }}</h2>
             @php
@@ -73,7 +72,6 @@
             @endif
         </div>
 
-        <!-- Order Items -->
         <div class="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-6">
             <h2 class="text-lg font-semibold text-white mb-4">{{ __('messages.items') }}</h2>
             <div class="space-y-4">
@@ -90,7 +88,6 @@
             </div>
         </div>
 
-        <!-- Order Summary -->
         <div class="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-6">
             <h2 class="text-lg font-semibold text-white mb-4">{{ __('messages.order_summary') }}</h2>
             <div class="space-y-2 text-sm">

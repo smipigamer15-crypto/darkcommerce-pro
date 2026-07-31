@@ -7,7 +7,6 @@
     </div>
 
     <div class="bg-[#111111] border border-white/5 rounded-2xl overflow-hidden">
-        <!-- Messages Area -->
         <div class="h-[500px] overflow-y-auto p-6 space-y-4" id="admin-chat-messages">
             @forelse($messages as $msg)
                 <div class="flex {{ $msg['is_admin'] ? 'justify-start' : 'justify-end' }}">
@@ -30,7 +29,7 @@
             @endforelse
         </div>
 
-        <!-- Reply Input -->
+
         <div class="border-t border-white/5 p-4">
             <form wire:submit.prevent="sendReply" class="flex gap-3">
                 <input type="text" wire:model="replyMessage" placeholder="Type your reply..." 

@@ -45,7 +45,6 @@ class WishlistController extends Controller
             return redirect()->route('login');
         }
 
-        // Додаємо в кошик (БД)
         $existing = Cart::where('user_id', auth()->id())
             ->where('product_id', $product->id)
             ->first();
@@ -62,7 +61,6 @@ class WishlistController extends Controller
             ]);
         }
 
-        // Видаляємо з wishlist
         auth()->user()->wishlist()->detach($product->id);
 
         return redirect()->route('cart.index')->with('success', __('messages.moved_to_cart'));

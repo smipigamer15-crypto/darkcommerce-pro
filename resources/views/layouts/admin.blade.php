@@ -13,7 +13,6 @@
 </head>
 <body class="bg-[#09090B] text-white font-sans antialiased">
     <div class="flex h-screen overflow-hidden">
-        <!-- Sidebar -->
         <aside class="w-64 bg-[#0A0A0B] border-r border-white/5 flex flex-col fixed inset-y-0 left-0 z-50">
             <div class="p-6 border-b border-white/5">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
@@ -72,7 +71,6 @@
             </div>
         </aside>
 
-        <!-- Main Content -->
         <main class="flex-1 ml-64 overflow-y-auto">
             @yield('content')
         </main>

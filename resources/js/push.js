@@ -1,25 +1,23 @@
-// resources/js/push.js
+
 export async function initPushNotifications() {
     if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
         console.log('Push notifications not supported');
         return;
     }
 
-    // Реєструємо Service Worker
+
     const registration = await navigator.serviceWorker.register('/service-worker.js');
 
-    // Запитуємо дозвіл
+
     const permission = await Notification.requestPermission();
     
     if (permission !== 'granted') return;
 
-    // Підписуємось
     const subscription = await registration.pushManager.subscribe({
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array('BEl62iXVY5tQ3k0RmBqGnYGFRPT1a0NfYKUZ5mz0Jk9_LHjTqZnPxVlbjEqP5nEKpHZ4tFQ5sRRqSUkBBS5PfJ0')
     });
 
-    // Відправляємо підписку на сервер
     await fetch('/push/subscribe', {
         method: 'POST',
         headers: {

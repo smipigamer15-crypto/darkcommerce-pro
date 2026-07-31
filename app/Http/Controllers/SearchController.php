@@ -23,7 +23,6 @@ class SearchController extends Controller
                 ->with(['brand', 'categories'])
                 ->paginate(12);
                 
-            // Зберігаємо історію пошуку в сесії
             $history = session()->get('search_history', []);
             if (!in_array($query, $history)) {
                 array_unshift($history, $query);

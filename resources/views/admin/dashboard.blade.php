@@ -11,13 +11,12 @@
                 <p class="text-zinc-400 mt-1">Welcome back, {{ auth()->user()->name }}</p>
             </div>
             <div class="flex items-center gap-3">
-                <a href="{{ route('admin.products.create') }}" class="px-6 py-3 bg-green-500 hover:bg-green-400 text-white font-semibold rounded-xl transition-all hover:scale-105">
+                <a href="{{ route('admin.products.create') }}" class="px-6 py-3 bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-xl transition-all hover:scale-105">
                     + Add Product
                 </a>
             </div>
         </div>
 
-        <!-- Stats -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
                 <p class="text-zinc-400 text-sm mb-2">Total Revenue</p>
@@ -40,7 +39,6 @@
             </div>
         </div>
 
-        <!-- Recent Orders -->
         <div class="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-8">
             <h2 class="text-xl font-semibold text-white mb-6">Recent Orders</h2>
             <div class="overflow-x-auto">
@@ -74,10 +72,9 @@
             </div>
         </div>
 
-        <!-- Low Stock Alert -->
         @if($low_stock->count() > 0)
             <div class="bg-[#111111] border border-red-500/20 rounded-2xl p-6">
-                <h2 class="text-xl font-semibold text-red-400 mb-4">⚠️ Low Stock Alert</h2>
+                <h2 class="text-xl font-semibold text-red-400 mb-4">Low Stock Alert</h2>
                 <div class="space-y-3">
                     @foreach($low_stock as $product)
                         <div class="flex items-center justify-between p-3 bg-red-500/5 rounded-xl">

@@ -1,5 +1,4 @@
 <div class="fixed bottom-6 right-6 z-50">
-    <!-- Chat Button -->
     @if(!$isOpen)
         <button wire:click="open" 
                 class="w-14 h-14 bg-indigo-500 hover:bg-indigo-400 rounded-2xl flex items-center justify-center shadow-2xl hover:shadow-indigo-500/25 transition-all hover:scale-110">
@@ -7,10 +6,9 @@
         </button>
     @endif
 
-    <!-- Chat Window -->
+
     @if($isOpen)
         <div class="bg-[#111111] border border-white/10 rounded-2xl w-80 sm:w-96 shadow-2xl overflow-hidden animate-fade-in">
-            <!-- Header -->
             <div class="bg-indigo-500 p-4 flex items-center justify-between">
                 <div class="flex items-center gap-3">
                     <div class="relative">
@@ -34,7 +32,6 @@
                 </div>
             </div>
 
-            <!-- Messages -->
             <div class="h-80 overflow-y-auto p-4 space-y-3" id="chat-messages">
                 @if(empty($messages))
                     <div class="text-center py-10">
@@ -57,7 +54,6 @@
                 @endforeach
             </div>
 
-            <!-- Input -->
             <div class="p-4 border-t border-white/5">
                 <form wire:submit.prevent="sendMessage" class="flex gap-2">
                     <input type="text" wire:model="newMessage" placeholder="Type a message..." 

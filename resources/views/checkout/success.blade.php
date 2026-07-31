@@ -6,7 +6,6 @@
 <div class="min-h-screen bg-[#09090B] py-20">
     <div class="max-w-3xl mx-auto px-4">
         
-        <!-- Success Header -->
         <div class="text-center mb-12">
             <div class="relative inline-flex">
                 <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full shadow-2xl shadow-green-500/20 mb-6 animate-bounce">
@@ -22,7 +21,7 @@
             </div>
         </div>
 
-        <!-- Points Earned -->
+
         @if(session('points_earned'))
             <div class="bg-gradient-to-r from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-2xl p-6 mb-6 flex items-center gap-4">
                 <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -35,9 +34,9 @@
             </div>
         @endif
 
-        <!-- Order Items Card -->
+
         <div class="bg-[#111111] border border-white/5 rounded-3xl overflow-hidden mb-6">
-            <!-- Items Header -->
+
             <div class="p-6 md:p-8">
                 <h3 class="text-white font-semibold text-lg mb-6 flex items-center gap-2">
                     <span class="w-8 h-8 bg-indigo-500/10 rounded-lg flex items-center justify-center">
@@ -66,7 +65,6 @@
                 </div>
             </div>
 
-            <!-- Totals -->
             <div class="border-t border-white/5 p-6 md:p-8 bg-white/[0.02]">
                 <div class="space-y-2 text-sm">
                     <div class="flex justify-between">
@@ -95,7 +93,6 @@
             </div>
         </div>
 
-        <!-- Shipping + Status Row -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             @if($order->shipping_address)
                 <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
@@ -127,7 +124,6 @@
             </div>
         </div>
 
-        <!-- Actions -->
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="{{ route('orders.show', $order) }}" class="px-8 py-4 bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-2xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 flex items-center justify-center gap-2">
                 <i class="fa-solid fa-magnifying-glass"></i> {{ __('messages.track_order') }}

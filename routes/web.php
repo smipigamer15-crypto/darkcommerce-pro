@@ -21,24 +21,19 @@ use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
-// Language
 Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
-// Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Products
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::get('/{slug}', [ProductController::class, 'show'])->name('show');
 });
 
-// Newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 Route::post('/newsletter/resubscribe', [NewsletterController::class, 'resubscribe'])->name('newsletter.resubscribe');
 
-// Cart
 Route::prefix('cart')->name('cart.')->group(function () {
     Route::get('/', [CartController::class, 'index'])->name('index');
     Route::post('/add', [CartController::class, 'add'])->name('add');
@@ -48,33 +43,26 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('/coupon', [CouponController::class, 'remove'])->name('coupon.remove');
 });
 
-// Gift Cards
 Route::get('/gift-cards', [GiftCardController::class, 'create'])->name('gift-cards.create');
 Route::post('/gift-cards', [GiftCardController::class, 'store'])->name('gift-cards.store');
 Route::get('/gift-cards/{giftCard}', [GiftCardController::class, 'show'])->name('gift-cards.show');
 Route::post('/gift-cards/verify', [GiftCardController::class, 'verify'])->name('gift-cards.verify');
 Route::post('/gift-cards/remove', [GiftCardController::class, 'remove'])->name('gift-cards.remove');
 
-// Push Notifications
 Route::post('/push/subscribe', [PushNotificationController::class, 'subscribe'])->name('push.subscribe');
 Route::post('/push/test', [PushNotificationController::class, 'sendTest'])->name('push.test');
 
-// Stripe
 Route::get('/stripe/checkout/{order}', [StripePaymentController::class, 'checkout'])->name('stripe.checkout');
 Route::get('/stripe/success/{order}', [StripePaymentController::class, 'success'])->name('stripe.success');
 Route::get('/stripe/cancel/{order}', [StripePaymentController::class, 'cancel'])->name('stripe.cancel');
 
-// Sitemap
 Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
-// Search
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::get('/search/suggest', [SearchController::class, 'suggest'])->name('search.suggest');
 
-// Reviews
 Route::post('/products/{product}/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
-// Checkout
 Route::prefix('checkout')->name('checkout.')->group(function () {
     Route::get('/', [CheckoutController::class, 'index'])->name('index');
     Route::post('/', [CheckoutController::class, 'store'])->name('store');
@@ -84,7 +72,6 @@ Route::prefix('checkout')->name('checkout.')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Protected routes
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('edit');
@@ -109,7 +96,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 });
 
-// Admin
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/orders', [AdminDashboardController::class, 'orders'])->name('orders');
@@ -122,7 +108,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/returns/{return}', [AdminDashboardController::class, 'updateReturn'])->name('returns.update');
     Route::get('/chat', fn() => view('admin.chat'))->name('chat');
 
-    // Flash Sales
     Route::get('/flash-sales', [AdminDashboardController::class, 'flashSales'])->name('flash-sales');
     Route::post('/flash-sales', [AdminDashboardController::class, 'storeFlashSale'])->name('flash-sales.store');
     Route::put('/flash-sales/{flashSale}/toggle', [AdminDashboardController::class, 'toggleFlashSale'])->name('flash-sales.toggle');

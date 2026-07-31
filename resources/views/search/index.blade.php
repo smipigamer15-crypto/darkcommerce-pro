@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-[#09090B] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Search Form -->
         <div class="mb-10">
             <form action="{{ route('search') }}" method="GET">
                 <div class="relative max-w-2xl mx-auto">

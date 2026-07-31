@@ -12,7 +12,10 @@ class ReviewController extends Controller
     {
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'required|string|min:10',
+            'comment' => 'required|string|min:10|max:150',
+        ], [
+            'comment.min' => __('messages.review_min_error'),
+            'comment.max' => __('messages.review_max_error'),
         ]);
 
         Review::create([
@@ -23,7 +26,6 @@ class ReviewController extends Controller
             'is_approved' => true,
         ]);
 
-        // Оновлюємо рейтинг товару
         $avgRating = $product->reviews()->where('is_approved', true)->avg('rating') ?? 0;
         $reviewsCount = $product->reviews()->where('is_approved', true)->count();
         

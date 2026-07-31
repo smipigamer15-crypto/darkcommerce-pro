@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// resources/js/app.js
 import { initPushNotifications } from './push';
 
-// В кінці файлу:
 document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.push-enabled')) {
         initPushNotifications();

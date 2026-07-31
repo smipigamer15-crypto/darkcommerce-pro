@@ -118,7 +118,6 @@ class CheckoutController extends Controller
     $giftCardDiscount = session('gift_card') ? min(session('gift_card')['balance'], $subtotal) : 0;
     $totalBeforePoints = $subtotal + $shipping + $tax - $couponDiscount - $giftCardDiscount;
     
-    // === СПИСУЄМО БАЛИ ===
     $pointsDiscount = 0;
     $pointsUsed = 0;
     
@@ -136,7 +135,6 @@ class CheckoutController extends Controller
             Log::emergency('Points to use: ' . $pointsUsed);
             Log::emergency('Discount: $' . $pointsDiscount);
             
-            // СПИСУЄМО БАЛИ
             auth()->user()->decrement('points', $pointsUsed);
             
             Log::emergency('Points AFTER: ' . auth()->user()->fresh()->points);

@@ -17,7 +17,6 @@ class CouponController extends Controller
         if ($coupon->expires_at && now()->gt($coupon->expires_at)) return back()->with('error', 'Coupon expired.');
         if ($coupon->max_uses && $coupon->used_count >= $coupon->max_uses) return back()->with('error', 'Limit reached.');
 
-        // Беремо кошик з БД
         $subtotal = 0;
         if (auth()->check()) {
             $cartItems = Cart::with('product')->where('user_id', auth()->id())->get();

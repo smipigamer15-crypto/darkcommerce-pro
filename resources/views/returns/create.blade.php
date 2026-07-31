@@ -12,7 +12,6 @@
         <h1 class="text-3xl font-bold mb-2">{{ __('messages.return_request') }}</h1>
         <p class="text-zinc-400 mb-8">{{ __('messages.return_request_desc') }}</p>
         
-        <!-- Order Info -->
         <div class="bg-[#111111] border border-white/5 rounded-2xl p-6 mb-6">
             <div class="flex items-center gap-4">
                 <div class="w-12 h-12 bg-dark-800 rounded-xl flex items-center justify-center">
@@ -26,7 +25,6 @@
             </div>
         </div>
 
-        <!-- Return Form -->
         <form action="{{ route('returns.store', $order) }}" method="POST" class="bg-[#111111] border border-white/5 rounded-2xl p-6">
             @csrf
             

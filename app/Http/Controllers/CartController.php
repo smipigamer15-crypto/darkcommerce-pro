@@ -33,7 +33,7 @@ class CartController extends Controller
                     ];
                 });
         } else {
-            // Гостьовий кошик — з сесії
+     
             $sessionCart = session()->get('cart', []);
             foreach ($sessionCart as $id => $item) {
                 $product = Product::find($id);
@@ -75,7 +75,7 @@ class CartController extends Controller
                 ]);
             }
         } else {
-            // Гостьовий кошик — зберігаємо в сесії
+
             $cart = session()->get('cart', []);
 
             if (isset($cart[$product->id])) {

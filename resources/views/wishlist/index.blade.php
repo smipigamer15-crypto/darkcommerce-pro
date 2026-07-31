@@ -5,7 +5,6 @@
 @section('content')
 <div class="min-h-screen bg-[#09090B] text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <!-- Header -->
         <div class="flex items-center justify-between mb-8">
             <div>
                 <h1 class="text-3xl font-bold">{{ __('messages.wishlist') }}</h1>
@@ -26,12 +25,11 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 @foreach($wishlistItems as $product)
                     <div class="group bg-[#111111] rounded-2xl border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-indigo-500/5">
-                        <!-- Product Image -->
                         <a href="{{ route('products.show', $product->slug) }}" class="block aspect-square bg-gradient-to-br from-dark-800 to-dark-900 relative overflow-hidden">
                             @if($product->primary_image)
                                 <img src="{{ $product->primary_image->url }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             @else
-                                <div class="w-full h-full flex items-center justify-center text-6xl group-hover:scale-110 transition-transform">📦</div>
+                                <div class="w-full h-full flex items-center justify-center text-6xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-box-open"></i></div>
                             @endif
                             
                             @if($product->discount_price)
@@ -50,7 +48,7 @@
                                 </div>
                             @endif
 
-                            <!-- Hover Overlay -->
+       
                             <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                                 <span class="px-6 py-3 bg-white text-black font-semibold rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
                                     <i class="fa-solid fa-eye mr-2"></i>{{ __('messages.quick_view') }}
@@ -58,7 +56,7 @@
                             </div>
                         </a>
 
-                        <!-- Product Info -->
+               
                         <div class="p-5">
                             @if($product->brand)
                                 <p class="text-xs font-medium text-indigo-400 uppercase tracking-wider mb-2">{{ $product->brand->name }}</p>
@@ -68,7 +66,7 @@
                                 <a href="{{ route('products.show', $product->slug) }}">{{ $product->name }}</a>
                             </h3>
 
-                            <!-- Rating -->
+        
                             @if($product->reviews_count > 0)
                                 <div class="flex items-center gap-2 mb-3">
                                     <div class="flex items-center gap-0.5">
@@ -80,7 +78,7 @@
                                 </div>
                             @endif
 
-                            <!-- Price & Stock -->
+          
                             <div class="flex items-end justify-between mb-4">
                                 <div>
                                     @if($product->discount_price)
@@ -97,9 +95,8 @@
                                 @endif
                             </div>
 
-                            <!-- Actions -->
-                            
-<!-- Actions -->
+                  
+                        
 <div class="flex items-center gap-2">
     <form action="{{ route('wishlist.addToCart', $product) }}" method="POST" class="flex-1">
         @csrf

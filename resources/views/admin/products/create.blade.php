@@ -45,10 +45,10 @@
                     </div>
                     <div>
                         <label class="block text-sm text-zinc-400 mb-2">Brand</label>
-                        <select name="brand_id" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-indigo-500/50">
-                            <option value="">No Brand</option>
+                        <select name="brand_id" class="appearance-none bg-[#111111] border border-white/10 rounded-xl pl-4 pr-10 py-3 text-white text-sm focus:outline-none focus:border-indigo-500/50 cursor-pointer hover:border-white/20 transition-all w-full">
+                            <option value="" class="bg-[#111111] text-white">No Brand</option>
                             @foreach($brands as $brand)
-                                <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                <option value="{{ $brand->id }}" class="bg-[#111111] text-white">{{ $brand->name }}</option>
                             @endforeach
                         </select>
                     </div>

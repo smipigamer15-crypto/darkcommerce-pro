@@ -6,7 +6,6 @@
 
 @section('content')
 <div class="min-h-screen bg-[#09090B] text-white">
-    <!-- Breadcrumbs -->
     <div class="border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <nav class="flex items-center gap-2 text-sm text-zinc-400">
@@ -25,16 +24,14 @@
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <!-- Product Image -->
             <div class="space-y-4">
                 <div class="aspect-square bg-gradient-to-br from-dark-800 to-dark-900 rounded-2xl flex items-center justify-center relative overflow-hidden border border-white/5 group cursor-zoom-in">
                     @if($product->primary_image)
                         <img src="{{ $product->primary_image->url }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-150 transition-transform duration-700">
                     @else
-                        <div class="text-[150px] group-hover:scale-110 transition-transform">📦</div>
+                        <div class="text-[150px] group-hover:scale-110 transition-transform"><i class="fa-solid fa-box-open text-zinc-700"></i></div>
                     @endif
-                    
-                    <!-- Discount Badge -->
+
                     @if($product->discount_price)
                         <div class="absolute top-4 left-4 z-10">
                             <span class="px-4 py-2 text-sm font-bold bg-red-500 text-white rounded-full shadow-lg shadow-red-500/20 animate-pulse">
@@ -43,7 +40,6 @@
                         </div>
                     @endif
 
-                    <!-- Stock Badge -->
                     @if($product->stock <= 5 && $product->stock > 0)
                         <div class="absolute top-4 right-4 z-10">
                             <span class="px-4 py-2 text-sm font-bold bg-yellow-500/20 text-yellow-400 rounded-full border border-yellow-500/30 backdrop-blur-sm">
@@ -53,7 +49,6 @@
                     @endif
                 </div>
 
-                <!-- Thumbnails Row -->
                 <div class="grid grid-cols-4 gap-3">
                     @for($i = 0; $i < 4; $i++)
                         <div class="aspect-square bg-dark-800 rounded-xl border border-white/5 flex items-center justify-center text-2xl cursor-pointer hover:border-indigo-500/50 transition-all hover:scale-105">
@@ -69,9 +64,7 @@
                 </div>
             </div>
 
-            <!-- Product Info -->
             <div>
-                <!-- Brand -->
                 @if($product->brand)
                     <div class="flex items-center gap-3 mb-4">
                         <div class="w-8 h-8 bg-indigo-500/10 rounded-lg flex items-center justify-center">
@@ -81,10 +74,8 @@
                     </div>
                 @endif
 
-                <!-- Name -->
                 <h1 class="text-3xl lg:text-4xl font-bold text-white mb-4 leading-tight">{{ $product->name }}</h1>
 
-                <!-- Rating -->
                 <div class="flex items-center gap-4 mb-6 p-4 bg-[#111111] rounded-2xl border border-white/5">
                     <div class="flex items-center gap-1">
                         @for($i = 1; $i <= 5; $i++)
@@ -97,7 +88,6 @@
                     <span class="text-zinc-400 text-sm">· {{ $product->reviews_count }} {{ __('messages.reviews') }}</span>
                 </div>
 
-                <!-- Price -->
                 <div class="flex items-baseline gap-3 mb-6 bg-[#111111] rounded-2xl p-5 border border-white/5">
                     @if($product->discount_price)
                         <span class="text-4xl font-bold text-white">${{ number_format($product->discount_price, 2) }}</span>
@@ -108,12 +98,10 @@
                     @endif
                 </div>
 
-                <!-- Description -->
                 <div class="prose prose-invert max-w-none mb-8">
                     <p class="text-zinc-300 leading-relaxed">{{ $product->description }}</p>
                 </div>
 
-                <!-- Stock Status -->
                 <div class="flex items-center gap-3 mb-6">
                     @if($product->stock > 10)
                         <div class="flex items-center gap-2 px-4 py-2 bg-green-500/10 rounded-xl">
@@ -133,7 +121,6 @@
                     @endif
                 </div>
 
-                <!-- Add to Cart -->
                 <div class="flex items-center gap-4">
                     <form action="{{ route('cart.add') }}" method="POST" class="flex-1">
                         @csrf
@@ -157,7 +144,6 @@
                     </form>
                 </div>
 
-                <!-- SKU & Categories -->
                 <div class="mt-6 pt-6 border-t border-white/5 space-y-3">
                     <div class="flex items-center gap-2 text-sm">
                         <span class="text-zinc-500">{{ __('messages.sku') }}:</span>
@@ -177,7 +163,6 @@
             </div>
         </div>
 
-        <!-- Reviews Section -->
         <div class="mt-20">
             <div class="flex items-center justify-between mb-8">
                 <div>
@@ -203,7 +188,8 @@
                     <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
                         <h3 class="text-lg font-semibold text-white mb-6">{{ __('messages.write_your_review') }}</h3>
                         <form action="{{ route('reviews.store', $product) }}" method="POST">@csrf
-                            <div class="mb-6"><label class="block text-sm text-zinc-400 mb-3">{{ __('messages.your_rating') }}</label>
+                            <div class="mb-6">
+                                <label class="block text-sm text-zinc-400 mb-3">{{ __('messages.your_rating') }}</label>
                                 <div class="flex items-center gap-1" x-data="{ rating: 0 }">
                                     @for($i=1;$i<=5;$i++)
                                         <button type="button" @click="rating = {{ $i }}" class="group">
@@ -214,8 +200,22 @@
                                     <input type="hidden" name="rating" x-model="rating">
                                 </div>
                             </div>
-                            <div class="mb-4"><label class="block text-sm text-zinc-400 mb-2">{{ __('messages.your_review') }}</label><textarea name="comment" rows="4" required placeholder="{{ __('messages.share_experience') }}" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white resize-none focus:outline-none focus:border-indigo-500/50"></textarea></div>
-                            <div class="flex gap-3"><button type="submit" class="px-8 py-3 bg-indigo-500 text-white rounded-xl hover:bg-indigo-400 transition-all"><i class="fa-solid fa-paper-plane mr-1"></i> {{ __('messages.submit_review') }}</button><button type="button" onclick="document.getElementById('review-form').classList.add('hidden')" class="px-8 py-3 border border-white/10 text-white rounded-xl hover:bg-white/5">{{ __('messages.cancel') }}</button></div>
+                            <div class="mb-4">
+                                <label class="block text-sm text-zinc-400 mb-2">{{ __('messages.your_review') }}</label>
+                                <textarea name="comment" id="review-textarea" rows="4" required 
+                                        placeholder="{{ __('messages.share_experience') }}"
+                                        class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-zinc-500 focus:outline-none focus:border-indigo-500/50 transition-all resize-none"
+                                        minlength="10"
+                                        oninput="updateCharCount()"></textarea>
+                                <div class="flex items-center justify-between mt-1">
+                                    <p class="text-zinc-500 text-xs">{{ __('messages.min_chars', ['count' => 10]) }}</p>
+                                    <p class="text-xs" id="char-count-text">0/10</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <button type="submit" class="px-8 py-3 bg-indigo-500 text-white rounded-xl hover:bg-indigo-400 transition-all"><i class="fa-solid fa-paper-plane mr-1"></i> {{ __('messages.submit_review') }}</button>
+                                <button type="button" onclick="document.getElementById('review-form').classList.add('hidden')" class="px-8 py-3 border border-white/10 text-white rounded-xl hover:bg-white/5">{{ __('messages.cancel') }}</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -252,25 +252,64 @@
                 </div>
             @else
                 <div class="text-center py-12 bg-[#111111] rounded-2xl border border-white/5">
-                    <div class="text-5xl mb-4">⭐</div>
+                    <div class="text-5xl mb-4"><i class="fa-solid fa-star text-zinc-600"></i></div>
                     <p class="text-zinc-400 text-lg">{{ __('messages.no_reviews_yet') }}</p>
                 </div>
             @endif
         </div>
 
-        <!-- Related Products -->
         @if($relatedProducts->count() > 0)
             <div class="mt-20">
-                <h2 class="text-2xl font-bold text-white mb-8">{{ __('messages.related_products') }}</h2>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="flex items-center justify-between mb-8">
+                    <h2 class="text-2xl font-bold text-white">{{ __('messages.related_products') }}</h2>
+                    <a href="{{ route('products.index') }}" class="text-indigo-400 hover:text-indigo-300 text-sm flex items-center gap-1 group">
+                        {{ __('messages.view_all') }} <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                     @foreach($relatedProducts as $related)
-                        <div class="group bg-[#111111] rounded-2xl border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-300 hover:-translate-y-1">
-                            <a href="{{ route('products.show', $related->slug) }}" class="block aspect-square bg-dark-800 flex items-center justify-center overflow-hidden">
-                                @if($related->primary_image)<img src="{{ $related->primary_image->url }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">@else<span class="text-5xl group-hover:scale-110 transition-transform">📦</span>@endif
+                        <div class="group bg-[#111111] rounded-2xl border border-white/5 overflow-hidden hover:border-white/10 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-indigo-500/5">
+                            <a href="{{ route('products.show', $related->slug) }}" class="block aspect-square bg-gradient-to-br from-dark-800 to-dark-900 relative overflow-hidden">
+                                @if($related->primary_image)
+                                    <img src="{{ $related->primary_image->url }}" alt="{{ $related->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center"><i class="fa-solid fa-box-open text-6xl text-zinc-700 group-hover:scale-110 transition-transform"></i></div>
+                                @endif
+                                @if($related->discount_price)
+                                    <div class="absolute top-3 left-3">
+                                        <span class="px-3 py-1.5 text-xs font-bold bg-red-500 text-white rounded-full shadow-lg shadow-red-500/20">-{{ round((($related->price - $related->discount_price) / $related->price) * 100) }}%</span>
+                                    </div>
+                                @endif
+                                <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                    <span class="px-6 py-3 bg-white text-black font-semibold rounded-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                                        <i class="fa-solid fa-eye mr-2"></i>{{ __('messages.quick_view') }}
+                                    </span>
+                                </div>
                             </a>
                             <div class="p-4">
-                                <h3 class="text-sm font-semibold text-white mb-2 line-clamp-2 group-hover:text-indigo-400 transition-colors">{{ $related->name }}</h3>
-                                <p class="text-lg font-bold text-white">${{ number_format($related->final_price, 2) }}</p>
+                                @if($related->brand)
+                                    <p class="text-xs font-medium text-indigo-400 uppercase tracking-wider mb-2">{{ $related->brand->name }}</p>
+                                @endif
+                                <h3 class="text-sm font-semibold text-white mb-3 line-clamp-2 leading-snug group-hover:text-indigo-400 transition-colors">
+                                    <a href="{{ route('products.show', $related->slug) }}">{{ $related->name }}</a>
+                                </h3>
+                                <div class="flex items-end justify-between">
+                                    <div>
+                                        @if($related->discount_price)
+                                            <span class="text-lg font-bold text-white">${{ number_format($related->discount_price, 2) }}</span>
+                                            <span class="ml-2 text-sm text-zinc-500 line-through">${{ number_format($related->price, 2) }}</span>
+                                        @else
+                                            <span class="text-lg font-bold text-white">${{ number_format($related->price, 2) }}</span>
+                                        @endif
+                                    </div>
+                                    <form action="{{ route('cart.add') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="product_id" value="{{ $related->id }}">
+                                        <button class="p-2 bg-indigo-500 hover:bg-indigo-400 rounded-lg transition-all hover:scale-110 opacity-0 group-hover:opacity-100">
+                                            <i class="fa-solid fa-cart-plus text-white text-xs"></i>
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -279,4 +318,23 @@
         @endif
     </div>
 </div>
+<script>
+    function updateCharCount() {
+        const textarea = document.getElementById('review-textarea');
+        const counter = document.getElementById('char-count-text');
+        const count = textarea.value.length;
+        
+        counter.textContent = count + '/10';
+        
+        if (count < 10) {
+            counter.className = 'text-xs text-red-400';
+        } else {
+            counter.className = 'text-xs text-green-400';
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCharCount();
+    });
+</script>
 @endsection

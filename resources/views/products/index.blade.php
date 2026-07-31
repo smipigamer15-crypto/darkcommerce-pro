@@ -4,7 +4,6 @@
 
 @section('content')
 <div class="min-h-screen bg-[#09090B] text-white">
-    <!-- Filters Bar -->
     <div class="sticky top-16 z-40 bg-[#09090B]/95 backdrop-blur-xl border-b border-white/5">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <form method="GET" class="space-y-4">

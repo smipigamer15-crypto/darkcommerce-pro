@@ -14,7 +14,6 @@ return new class extends Migration
             });
         }
         
-        // Додаємо expires_at в сесійний кошик не треба — просто оновимо логіку
     }
 
     public function down(): void

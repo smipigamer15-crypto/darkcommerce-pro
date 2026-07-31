@@ -21,7 +21,6 @@ class ProductController extends Controller
             ->where('slug', $slug)
             ->firstOrFail();
 
-        // Зберігаємо перегляд
         if (auth()->check()) {
             $existingView = ProductView::where('user_id', auth()->id())
                 ->where('product_id', $product->id)
@@ -38,7 +37,6 @@ class ProductController extends Controller
                 ]);
             }
 
-            // Видаляємо старі записи (залишаємо 50)
             $oldViews = ProductView::where('user_id', auth()->id())
                 ->latest('viewed_at')
                 ->skip(50)

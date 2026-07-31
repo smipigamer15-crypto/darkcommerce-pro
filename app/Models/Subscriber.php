@@ -26,7 +26,6 @@ class Subscriber extends Model
     protected static function booted()
     {
     static::creating(function ($subscriber) {
-        // Максимум 3 спроби підписки з однієї IP за годину
         $recentFromIp = static::where('created_at', '>=', now()->subHour())->count();
         if ($recentFromIp >= 3) {
             throw new \Exception('Too many subscription attempts. Try again later.');

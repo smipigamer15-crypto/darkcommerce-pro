@@ -10,9 +10,9 @@
         <form action="{{ route('checkout.store') }}" method="POST">
             @csrf
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Left Column - Forms -->
+       
                 <div class="lg:col-span-2 space-y-6">
-                    <!-- Contact Info -->
+    
                     <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
                         <h2 class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
                             <span class="w-8 h-8 bg-indigo-500/10 rounded-lg flex items-center justify-center"><i class="fa-solid fa-user text-indigo-400 text-sm"></i></span>
@@ -42,7 +42,6 @@
                         </div>
                     </div>
 
-                    <!-- Shipping Address -->
                     <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
                         <h2 class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
                             <span class="w-8 h-8 bg-green-500/10 rounded-lg flex items-center justify-center"><i class="fa-solid fa-truck-fast text-green-400 text-sm"></i></span>
@@ -74,7 +73,6 @@
                         </div>
                     </div>
 
-                    <!-- Payment Method -->
                     <div class="bg-[#111111] border border-white/5 rounded-2xl p-6">
                         <h2 class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
                             <span class="w-8 h-8 bg-purple-500/10 rounded-lg flex items-center justify-center"><i class="fa-solid fa-credit-card text-purple-400 text-sm"></i></span>
@@ -101,14 +99,12 @@
                     </div>
                 </div>
 
-                <!-- Right Column - Order Summary -->
                 <div class="lg:col-span-1">
                     <div class="bg-[#111111] border border-white/5 rounded-2xl p-6 sticky top-24">
                         <h3 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
                             <i class="fa-solid fa-receipt text-indigo-400"></i> {{ __('messages.order_summary') }}
                         </h3>
                         
-                        <!-- Cart Items -->
                         <div class="space-y-3 mb-6">
                             @foreach($cartItems as $item)
                                 <div class="flex gap-3 p-2 bg-dark-800 rounded-xl">
@@ -130,7 +126,6 @@
 
                         <hr class="border-white/5 mb-4">
 
-                        <!-- Totals -->
                         <div class="space-y-2 text-sm mb-4">
                             <div class="flex justify-between">
                                 <span class="text-zinc-400">{{ __('messages.subtotal') }}</span>
@@ -160,7 +155,7 @@
                             @endif
                         </div>
 
-                                              <!-- Use Points Checkbox -->
+                                
                         @auth
                             @if(auth()->user()->points > 0)
                                 <div class="mb-4 p-4 bg-gradient-to-r from-indigo-500/5 to-purple-500/5 border border-indigo-500/10 rounded-xl">
@@ -182,13 +177,11 @@
 
                         <hr class="border-white/5 my-4">
 
-                        <!-- Total -->
                         <div class="flex justify-between mb-6 p-4 bg-white/[0.02] rounded-xl">
                             <span class="text-lg font-semibold text-white">{{ __('messages.total') }}</span>
                             <span class="text-2xl font-bold text-white">${{ number_format($total, 2) }}</span>
                         </div>
 
-                        <!-- Submit -->
                         <button type="submit" class="w-full py-4 bg-indigo-500 hover:bg-indigo-400 text-white font-semibold rounded-xl transition-all hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 flex items-center justify-center gap-2">
                             <i class="fa-solid fa-lock"></i> {{ __('messages.place_order') }} — ${{ number_format($total, 2) }}
                         </button>
